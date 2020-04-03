@@ -1,4 +1,4 @@
-export default class Player1 {
+export default class Player2 {
   constructor (game) {
     this.gameHeight = game.gameHeight
     this.width = 100
@@ -8,7 +8,7 @@ export default class Player1 {
     this.speed = 0
 
     this.position = {
-      x: 9 * game.gameWidth / 10 - this.width / 2,
+      x: game.gameWidth / 10 - this.width / 2,
       y: game.gameHeight / 2 - this.height / 2
     }
   }
@@ -26,7 +26,7 @@ export default class Player1 {
   }
 
   draw (ctx) { // will probably need to be replaced like in ball
-    ctx.fillStyle = '#0ff'
+    ctx.fillStyle = '#f0f'
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
   }
 

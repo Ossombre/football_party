@@ -4,7 +4,7 @@ import router from './router'
 import vuetify from './plugins/vuetify'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import Player1 from './player1'
+import Game from './game'
 
 axios.defaults.withCredentials = true
 Vue.use(VueAxios, axios)
@@ -23,6 +23,19 @@ const ctx = canvas.getContext('2d')
 const GAME_WIDTH = 800
 const GAME_HEIGHT = 600
 
-const player1 = new Player1(GAME_WIDTH, GAME_HEIGHT)
+const game = new Game(GAME_WIDTH, GAME_HEIGHT)
+game.start()
 
-player1.draw(ctx)
+let lastTime = 0
+
+function gameLoop (timestamp) {
+  const deltaTime = timestamp - lastTime
+  lastTime = timestamp
+  ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT)
+  game.update(deltaTime)
+  game.draw(ctx)
+
+  requestAnimationFrame(gameLoop)
+}
+
+requestAnimationFrame(gameLoop)

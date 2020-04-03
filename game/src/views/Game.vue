@@ -1,5 +1,8 @@
 <template>
-  <canvas id="gameScreen" width="800" height="600"/>
+  <div>
+    <canvas id="gameScreen" width="800" height="600"/>
+    <!--img id="img_ball" src="assets/drawables/" style="display:none"/-->
+  </div>
 </template>
 <script>
 export default {
