@@ -13,6 +13,7 @@ export default class InputHandler {
           break
         case 90:
           player2.moveUp()
+          break
       }
     })
 

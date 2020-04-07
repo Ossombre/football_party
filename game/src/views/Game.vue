@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas id="gameScreen" width="800" height="600"/>
+    <canvas id="gameScreen" width="1000" height="600"/>
     <!--img id="img_ball" src="assets/drawables/" style="display:none"/-->
   </div>
 </template>
