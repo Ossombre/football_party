@@ -8,9 +8,10 @@ export default class Ball {
     this.counter = 0
 
     this.maxSpeedY = 2
-    this.speed = { x: 4, y: this.maxSpeedY }
+    this.speed = { x: 6, y: this.maxSpeedY }
     this.position = { x: 10, y: 10 }
     this.size = 16
+    this.leftTurn = false
   }
 
   draw (ctx) {
@@ -38,7 +39,6 @@ export default class Ball {
     const rightOfPlayer2 = this.game.player2.position.x + this.game.player2.width
     const bottomOfPlayer2 = this.game.player2.position.y + this.game.player2.height
     const topOfPlayer2 = this.game.player2.position.y
-    // const centerOfBallx = leftOfBall + this.size / 2
     const centerOfBally = topOfBall + this.size / 2
     if (topOfBall < 0 && bottomOfBall >= topOfPlayer1 && rightOfBall >= leftOfPlayer1) { // ball is stuck between top of p1 and screen borders
       this.position.x = leftOfPlayer1 - this.size
@@ -61,18 +61,35 @@ export default class Ball {
       if (this.speed.x < 0) {
         this.speed.x = -this.speed.x
       }
-    } else if (bottomOfBall > this.gameHeight && topOfBall >= bottomOfPlayer2 && leftOfBall <= rightOfPlayer2) { // ball is stuck between bottom of p2 and screen borders
+    } else if (bottomOfBall > this.gameHeight && topOfBall <= bottomOfPlayer2 && leftOfBall <= rightOfPlayer2) { // ball is stuck between bottom of p2 and screen borders
       this.position.x = rightOfPlayer2
       this.position.y = this.gameHeight - this.size
       this.speed.y = this.maxSpeedY
       if (this.speed.x < 0) {
         this.speed.x = -this.speed.x
       }
-    } else if (leftOfBall > this.gameWidth - this.size || leftOfBall < 0) { // wall on left or right
+    } else if (leftOfBall > this.gameWidth - this.size || leftOfBall < 0) { // wall on right or left
       this.speed.x = -this.speed.x
+      if (topOfBall > this.game.goalUpper && bottomOfBall < this.game.goalLower) {
+        if (leftOfBall < 0) {
+          this.game.scoreP1++
+          if (this.game.scoreP1 >= 5) {
+            this.EndGame(false)
+          }
+        } else {
+          this.game.scoreP2++
+          if (this.game.scoreP2 >= 5) {
+            this.EndGame(true)
+          }
+        }
+      }
     } else if (topOfBall > this.gameHeight - this.size || topOfBall < 0) { // wall on top or bottom
       this.speed.y = -this.speed.y
     } else if (rightOfBall >= leftOfPlayer1 && topOfBall <= bottomOfPlayer1 && bottomOfBall >= topOfPlayer1) { // player 1
+      if (!this.leftTurn) {
+        this.leftTurn = true
+        ++this.counter
+      }
       if (this.counter >= 10) { // accelerate ball after 10 side contacts with players
         this.speed.x > 0 ? this.speed.x += 1 : this.speed.x -= 1
         this.counter = 0
@@ -80,24 +97,26 @@ export default class Ball {
       // side of player 1
       if ((centerOfBally <= topOfPlayer1 + this.game.player1.height / 2 && rightOfBall - leftOfPlayer1 <= bottomOfBall - topOfPlayer1) ||
           (centerOfBally >= topOfPlayer1 + this.game.player1.height / 2 && rightOfBall - leftOfPlayer1 <= bottomOfPlayer1 - topOfBall)) {
-        console.log(rightOfBall - leftOfPlayer1)
-        ++this.counter
         if (this.speed.x > 0) {
           this.speed.x = -this.speed.x
         }
         this.position.x = leftOfPlayer1 - this.size
-      } else { // bottom of player 1
+      } else { // top or bottom of player 1
         if ((this.speed.y > 0 && bottomOfBall < topOfPlayer1 + this.game.player1.height / 2) ||
             (this.speed.y < 0 && topOfBall > topOfPlayer1 + this.game.player1.height / 2)) {
           this.speed.y = -this.speed.y
         }
         if (bottomOfBall < topOfPlayer1 + this.game.player1.height / 2) { // top of player 1
           this.position.y = topOfPlayer1 - this.size
-        } else {
+        } else { // bottom of player 1
           this.position.y = bottomOfPlayer1
         }
       }
     } else if (leftOfBall <= rightOfPlayer2 && topOfBall <= bottomOfPlayer2 && bottomOfBall >= topOfPlayer2) { // player 2
+      if (this.leftTurn) {
+        this.leftTurn = false
+        ++this.counter
+      }
       if (this.counter >= 10) { // accelerate ball after 10 side contacts with players
         this.speed.x > 0 ? this.speed.x += 1 : this.speed.x -= 1
         this.counter = 0
@@ -105,7 +124,6 @@ export default class Ball {
       // side of player 2
       if ((centerOfBally <= topOfPlayer2 + this.game.player2.height / 2 && rightOfPlayer2 - leftOfBall <= bottomOfBall - topOfPlayer2) ||
           (centerOfBally >= topOfPlayer2 + this.game.player2.height / 2 && rightOfPlayer2 - leftOfBall <= bottomOfPlayer2 - topOfBall)) {
-        ++this.counter
         if (this.speed.x < 0) {
           this.speed.x = -this.speed.x
         }
@@ -122,5 +140,23 @@ export default class Ball {
         }
       }
     }
+  }
+
+  EndGame (winnerLeft) {
+    if (winnerLeft) {
+      this.game.victory = 'Player 1 wins!'
+    } else {
+      this.game.victory = 'Player 2 wins!'
+    }
+    this.game.player1.isFrozen = true
+    this.game.player2.isFrozen = true
+    this.game.player1.stop()
+    this.game.player2.stop()
+    this.game.player1.position.y = this.game.gameHeight / 2 - this.game.player1.height / 2
+    this.game.player2.position.y = this.game.gameHeight / 2 - this.game.player2.height / 2
+    this.speed.x = 0
+    this.speed.y = 0
+    this.position.x = this.game.gameWidth / 2 - this.size / 2
+    this.position.y = this.game.gameHeight / 2 - this.size / 2
   }
 }

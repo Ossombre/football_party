@@ -7,6 +7,11 @@ export default class Game {
   constructor (gameWidth, gameHeight) {
     this.gameWidth = gameWidth
     this.gameHeight = gameHeight
+    this.goalUpper = gameHeight / 5
+    this.goalLower = 4 * gameHeight / 5
+    this.scoreP1 = 0
+    this.scoreP2 = 0
+    this.victory = ''
   }
 
   start () {
