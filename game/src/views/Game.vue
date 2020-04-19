@@ -1,25 +1,28 @@
 <template>
   <v-container>
     <v-row>
+      <v-card>
+        <v-overlay v-if="!start || this.$game.victory != ''" absolute=true>
+          <v-btn  v-on:click="startGame">{{button}}</v-btn>
+          <v-card v-if="this.$game.victory != ''">{{getVictory()}}</v-card>
+        </v-overlay>
+        <canvas id="gameScreen" ref="gameScreen" width="1000" height="600"/>
+      </v-card>
+      <!--img id="img_ball" src="assets/drawables/" style="display:none"/-->
+      <v-row>
+        <v-col>
+          <v-row>
+            <h1 style="margin-left: 240px"><pre>player 1:  {{ getScoreP1() }}</pre></h1>
+            <h1 style="margin-left: 125px"><pre>{{ getScoreP2() }}  :player 2</pre></h1>
+          </v-row>
+          <h1 id="victory" ref="victory" style="margin-left: 400px">{{getVictory()}}</h1>
+        </v-col>
+      </v-row>
       <h1>
         This is an about page <br>
         :{{$route.query.player1}}: <br>
         :{{$route.query.player2}}:
       </h1>
-      <div>
-        <v-btn v-if="!start" v-on:click="startGame">Start</v-btn>
-        <canvas id="gameScreen" ref="gameScreen" width="1000" height="600"/>
-        <!--img id="img_ball" src="assets/drawables/" style="display:none"/-->
-        <v-row>
-          <v-col>
-            <v-row>
-              <h1 style="margin-left: 240px"><pre>player 1:  {{ getScoreP1() }}</pre></h1>
-              <h1 style="margin-left: 125px"><pre>{{ getScoreP2() }}  :player 2</pre></h1>
-            </v-row>
-            <h1 style="margin-left: 400px">{{ getVictory() }}</h1>
-          </v-col>
-        </v-row>
-      </div>
     </v-row>
   </v-container>
 </template>
@@ -28,6 +31,7 @@ export default {
   name: 'Game',
   data: () => ({
     start: false,
+    button: 'Start',
     GAME_WIDTH: 1000,
     GAME_HEIGHT: 600,
     lastTime: 0,
@@ -50,8 +54,10 @@ export default {
       const canvas = this.$refs.gameScreen
       this.ctx = canvas.getContext('2d')
       this.start = true
+      this.button = 'restart'
 
       this.$game.start()
+      this.$game.victory = ''
       requestAnimationFrame(this.gameLoop)
     },
     gameLoop (timestamp) {
@@ -60,7 +66,9 @@ export default {
       this.ctx.clearRect(0, 0, this.GAME_WIDTH, this.GAME_HEIGHT)
       this.$game.update(deltaTime)
       this.$game.draw(this.ctx)
-      requestAnimationFrame(this.gameLoop)
+      if (this.$refs.victory.innerText == null || this.$refs.victory.innerText === '') {
+        requestAnimationFrame(this.gameLoop)
+      }
     }
   }
 }

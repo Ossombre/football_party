@@ -70,7 +70,9 @@ export default class Ball {
       }
     } else if (leftOfBall > this.gameWidth - this.size || leftOfBall < 0) { // wall on right or left
       this.speed.x = -this.speed.x
+      console.log('( ' + topOfBall + ' > ' + this.game.goalUpper + ' && ' + bottomOfBall + ' < ' + this.game.goalLower + ' )')
       if (topOfBall > this.game.goalUpper && bottomOfBall < this.game.goalLower) {
+        console.log('ok')
         if (leftOfBall < 0) {
           this.game.scoreP1++
           if (this.game.scoreP1 >= 5) {
@@ -148,7 +150,9 @@ export default class Ball {
     } else {
       this.game.victory = 'Player 2 wins!'
     }
-    this.game.player1.isFrozen = true
+    this.game.scoreP1 = 0
+    this.game.scoreP2 = 0
+    /* this.game.player1.isFrozen = true
     this.game.player2.isFrozen = true
     this.game.player1.stop()
     this.game.player2.stop()
@@ -157,6 +161,6 @@ export default class Ball {
     this.speed.x = 0
     this.speed.y = 0
     this.position.x = this.game.gameWidth / 2 - this.size / 2
-    this.position.y = this.game.gameHeight / 2 - this.size / 2
+    this.position.y = this.game.gameHeight / 2 - this.size / 2 */
   }
 }
