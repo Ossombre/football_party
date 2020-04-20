@@ -21,6 +21,11 @@
         </v-col>
       </v-row>
     </v-row>
+    <v-row justify="center">
+      <v-btn v-on:click="returnBack" color='orange'>
+        Return to the selection
+      </v-btn>
+    </v-row>
   </v-container>
 </template>
 <script>
@@ -79,6 +84,10 @@ export default {
       if (this.$refs.victory.innerText == null || this.$refs.victory.innerText === '') {
         requestAnimationFrame(this.gameLoop)
       }
+    },
+    returnBack: function (event) {
+      this.start = false
+      this.$router.go(-1)
     }
   },
   mounted () {
