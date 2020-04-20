@@ -80,7 +80,7 @@ export default {
       this.ctx.clearRect(0, 0, this.GAME_WIDTH, this.GAME_HEIGHT)
       this.$game.update(deltaTime)
       this.$game.draw(this.ctx)
-      if (this.$refs.victory.innerText == null || this.$refs.victory.innerText === '') {
+      if (this.$game.victory == null || this.$game.victory === '') {
         requestAnimationFrame(this.gameLoop)
       }
     },
