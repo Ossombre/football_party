@@ -32,6 +32,11 @@ export default class Player2 {
   }
 
   draw (ctx) { // will probably need to be replaced like in ball
+    ctx.beginPath()
+    ctx.strokeStyle = 'blue'
+    ctx.lineWidth = '10'
+    ctx.rect(this.position.x, this.position.y, this.width, this.height)// need to remove
+    ctx.stroke()
     ctx.drawImage(
       this.player2Picture,
       this.position.x,

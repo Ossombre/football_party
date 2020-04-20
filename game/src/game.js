@@ -28,6 +28,13 @@ export default class Game {
   }
 
   draw (ctx) {
+    ctx.drawImage(
+      document.getElementById('bg'),
+      0,
+      0,
+      1000,
+      600
+    )
     this.gameObjects.forEach((object) => object.draw(ctx))
   }
 }
