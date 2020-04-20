@@ -3,8 +3,8 @@
     <v-row>
       <v-card>
         <v-overlay v-if="!start || this.$game.victory != ''" absolute=true>
+          <h1 v-if="this.$game.victory != ''">{{getVictory()}}</h1>
           <v-btn  v-on:click="startGame">{{button}}</v-btn>
-          <v-card v-if="this.$game.victory != ''">{{getVictory()}}</v-card>
         </v-overlay>
         <canvas id="gameScreen" ref="gameScreen" width="1000" height="600"/>
         <img id="bg" :src='require("../assets/background.png")' style="display: none">
@@ -17,7 +17,6 @@
             <h1 style="margin-left: 240px"><pre>{{$route.query.player1.replace('_',' ')}}:  {{ getScoreP1() }}</pre></h1>
             <h1 style="margin-left: 125px"><pre>{{ getScoreP2() }}  :{{$route.query.player2.replace('_',' ')}}</pre></h1>
           </v-row>
-          <h1 id="victory" ref="victory" style="margin-left: 400px">{{getVictory()}}</h1>
         </v-col>
       </v-row>
     </v-row>
