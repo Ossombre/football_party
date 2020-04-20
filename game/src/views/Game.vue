@@ -23,14 +23,19 @@
   </v-container>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Game',
   data: () => ({
+    player: '',
     start: false,
     button: 'Start',
     GAME_WIDTH: 1000,
     GAME_HEIGHT: 600,
     lastTime: 0,
+    player1Stat: '',
+    player2Stat: '',
     ctx: ''
   }),
   methods: {
@@ -46,6 +51,14 @@ export default {
     startGame () {
       window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
                               window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
+
+      for (var k = 0; k < this.player.length; k++) {
+        if (this.player[k].name === this.$route.query.player2) {
+          this.player2Stat = this.player[k]
+        } else if (this.player[k].name === this.$route.query.player1) {
+          this.player1Stat = this.player[k]
+        }
+      }
 
       const canvas = this.$refs.gameScreen
       this.ctx = canvas.getContext('2d')
@@ -66,6 +79,11 @@ export default {
         requestAnimationFrame(this.gameLoop)
       }
     }
+  },
+  mounted () {
+    axios
+      .get('https://bridge.buddyweb.fr/api/footballparty/players')
+      .then(response => (this.player = response.data))
   }
 }
 </script>
