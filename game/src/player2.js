@@ -1,5 +1,6 @@
 export default class Player2 {
   constructor (game) {
+    this.player2Picture = document.getElementById('PictureP2')
     this.gameHeight = game.gameHeight
     this.width = 124
     this.height = 124
@@ -31,8 +32,11 @@ export default class Player2 {
   }
 
   draw (ctx) { // will probably need to be replaced like in ball
-    ctx.fillStyle = '#f0f'
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
+    ctx.drawImage(
+      this.player2Picture,
+      this.position.x,
+      this.position.y
+    )
   }
 
   update (deltaTime) {

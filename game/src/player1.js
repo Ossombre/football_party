@@ -1,6 +1,6 @@
 export default class Player1 {
   constructor (game) {
-    this.background = document.getElementById('background')
+    this.player1Picture = document.getElementById('PictureP1')
     this.gameHeight = game.gameHeight
     this.width = 124
     this.height = 124
@@ -47,9 +47,9 @@ export default class Player1 {
   }
 
   draw (ctx) { // will probably need to be replaced like in ball
-    this.test = this.rotateAndCache(this.background, Math.PI)
+    this.picture = this.rotateAndCache(this.player1Picture, Math.PI)
     ctx.drawImage(
-      this.test,
+      this.picture,
       this.position.x,
       this.position.y
     )

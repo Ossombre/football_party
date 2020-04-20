@@ -7,22 +7,18 @@
           <v-card v-if="this.$game.victory != ''">{{getVictory()}}</v-card>
         </v-overlay>
         <canvas id="gameScreen" ref="gameScreen" width="1000" height="600"/>
-        <img id="background" :src='require("../assets/" + $route.query.player2 + ".png")' style="display: none">
+        <img id="PictureP1" :src='require("../assets/" + $route.query.player2 + ".png")' style="display: none">
+        <img id="PictureP2" :src='require("../assets/" + $route.query.player1 + ".png")' style="display: none">
       </v-card>
       <v-row>
         <v-col>
           <v-row>
-            <h1 style="margin-left: 240px"><pre>player 1:  {{ getScoreP1() }}</pre></h1>
-            <h1 style="margin-left: 125px"><pre>{{ getScoreP2() }}  :player 2</pre></h1>
+            <h1 style="margin-left: 240px"><pre>{{$route.query.player1.replace('_',' ')}}:  {{ getScoreP1() }}</pre></h1>
+            <h1 style="margin-left: 125px"><pre>{{ getScoreP2() }}  :{{$route.query.player2.replace('_',' ')}}</pre></h1>
           </v-row>
           <h1 id="victory" ref="victory" style="margin-left: 400px">{{getVictory()}}</h1>
         </v-col>
       </v-row>
-      <h1>
-        This is an about page <br>
-        :{{$route.query.player1}}: <br>
-        :{{$route.query.player2}}:
-      </h1>
     </v-row>
   </v-container>
 </template>
