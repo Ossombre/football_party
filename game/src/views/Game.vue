@@ -66,7 +66,7 @@ export default {
       this.start = true
       this.button = 'restart'
 
-      this.$game.start()
+      this.$game.start(this.player1Stat, this.player2Stat)
       this.$game.victory = ''
       requestAnimationFrame(this.gameLoop)
     },

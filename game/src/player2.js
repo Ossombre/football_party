@@ -1,11 +1,11 @@
 export default class Player2 {
-  constructor (game) {
+  constructor (game, player2Stats) {
     this.player2Picture = document.getElementById('PictureP2')
     this.gameHeight = game.gameHeight
-    this.width = 124
-    this.height = 124
+    this.width = 112 + player2Stats.height * 3
+    this.height = 112 + player2Stats.height * 3
 
-    this.maxSpeed = 8
+    this.maxSpeed = 4 + (player2Stats.speed / 10)
     this.speed = 0
 
     this.position = {

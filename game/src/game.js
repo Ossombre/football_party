@@ -14,9 +14,9 @@ export default class Game {
     this.victory = ''
   }
 
-  start () {
-    this.player1 = new Player1(this)
-    this.player2 = new Player2(this)
+  start (player1Stats, player2Stats) {
+    this.player1 = new Player1(this, player1Stats)
+    this.player2 = new Player2(this, player2Stats)
     this.ball = new Ball(this)
     this.gameObjects = [this.player1, this.player2, this.ball]
     /* eslint-disable no-new */
