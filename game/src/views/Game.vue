@@ -7,8 +7,8 @@
           <v-card v-if="this.$game.victory != ''">{{getVictory()}}</v-card>
         </v-overlay>
         <canvas id="gameScreen" ref="gameScreen" width="1000" height="600"/>
+        <img id="background" src="../assets/Alfredo_Spaghetti.png" style='display: none'>
       </v-card>
-      <!--img id="img_ball" src="assets/drawables/" style="display:none"/-->
       <v-row>
         <v-col>
           <v-row>

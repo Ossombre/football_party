@@ -1,5 +1,6 @@
 export default class Player1 {
   constructor (game) {
+    this.background = document.getElementById('background')
     this.gameHeight = game.gameHeight
     this.width = 124
     this.height = 124
@@ -30,9 +31,28 @@ export default class Player1 {
     this.speed = 0
   }
 
+  rotateAndCache (image, angle) {
+    var offscreenCanvas = document.createElement('canvas')
+    var offscreenCtx = offscreenCanvas.getContext('2d')
+
+    var size = Math.max(image.width, image.height)
+    offscreenCanvas.width = size
+    offscreenCanvas.height = size
+
+    offscreenCtx.translate(size / 2, size / 2)
+    offscreenCtx.rotate(angle)
+    offscreenCtx.drawImage(image, -(image.width / 2), -(image.height / 2))
+
+    return offscreenCanvas
+  }
+
   draw (ctx) { // will probably need to be replaced like in ball
-    ctx.fillStyle = '#0ff'
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
+    this.test = this.rotateAndCache(this.background, Math.PI)
+    ctx.drawImage(
+      this.test,
+      this.position.x,
+      this.position.y
+    )
   }
 
   update (deltaTime) {
