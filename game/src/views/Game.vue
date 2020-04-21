@@ -4,7 +4,7 @@
       <v-card style="margin-left: 125px">
         <v-overlay v-if="!start || this.$game.victory != ''" absolute=true>
           <h1 v-if="this.$game.victory != ''">{{getVictory()}}</h1>
-          <v-btn  v-on:click="startGame">{{button}}</v-btn>
+          <v-btn style="margin-left: 50px" v-on:click="startGame">{{button}}</v-btn>
         </v-overlay>
         <canvas id="gameScreen" ref="gameScreen" width="1000" height="600"/>
         <img id="bg" :src='require("../assets/background.png")' style="display: none">
