@@ -1,38 +1,53 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="1" style="margin-left: 0px;margin-right:50px">
+  <v-container fluid>
+    <v-row style="margin-left:100pt">
+      <v-col >
         <v-row>
-          <v-card color="blue" width="1000">
+          <v-card color="blue" height="125pt" width="400pt">
             <v-row>
               <v-col cols="4">
-                <v-row>
                 <v-img
-                  :src='require("../assets/" + this.player[1].name + ".png")'>
+                  :src='require("../assets/" + $route.query.player1 + ".png")'>
                 </v-img>
-                </v-row>
               </v-col>
-              <v-col cols="4">
-                <v-row>
-                <v-card-title v-html="this.player[1].name.replace('_',' ').replace(' ','<br>')">
+              <v-col cols="4" style="margin-top: 25pt;">
+                <v-card-title v-html="$route.query.player1.replace('_',' ').replace(' ','<br>')">
                 </v-card-title>
-                </v-row>
+              </v-col>
+              <v-col cols="4" style="margin-top: 40pt;">
+                <h1>{{getScoreP1()}}</h1>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-row>
+      </v-col>
+      <v-col>
+        <h1 style="margin-top:50pt;margin-left:170pt">VS</h1>
+      </v-col>
+      <v-col style="margin-right:120px;">
+        <v-row>
+          <v-card color="red" height="125pt" width="400pt">
+            <v-row>
+              <v-col cols="4" style="margin-top: 40pt;">
+                <h1 style="margin-left:75pt">{{getScoreP2()}}</h1>
+              </v-col>
+              <v-col cols="4" style="margin-top: 20pt;">
+                <v-card-title v-html="$route.query.player2.replace('_',' ').replace(' ','<br>')">
+                </v-card-title>
               </v-col>
               <v-col cols="4">
-                <v-row>
-                <v-card-text>
-                    Speed: {{this.player[1].speed}} <br>
-                    Height: {{this.player[1].height}} <br>
-                </v-card-text>
-                </v-row>
+                <v-img
+                  :style="`transform: rotate(180deg);`"
+                  :src='require("../assets/" + $route.query.player2 + ".png")'>
+                </v-img>
               </v-col>
             </v-row>
           </v-card>
         </v-row>
       </v-col>
     </v-row>
-    <v-row>
-      <v-card style="margin-left: 60px">
+    <v-row >
+      <v-card style="margin-left: 320pt">
         <v-overlay style="text-align: center" v-if="!start || this.$game.victory != ''" absolute=true>
           <h1 style="display: block" v-if="this.$game.victory != ''">{{getVictory()}}</h1>
           <v-btn  v-on:click="startGame" style="display: inline-block">{{button}}</v-btn>
@@ -42,13 +57,9 @@
         <img id="PictureP1" :src='require("../assets/" + $route.query.player2 + ".png")' style="display: none">
         <img id="PictureP2" :src='require("../assets/" + $route.query.player1 + ".png")' style="display: none">
       </v-card>
-      <div style="width: 100%; text-align: center">
-        <h1 style="display: inline-block"><pre>{{$route.query.player1.replace('_',' ')}}:  {{ getScoreP1() }}</pre></h1>
-        <h1 style="margin-left: 100px; display: inline-block"><pre>{{ getScoreP2() }}  :{{$route.query.player2.replace('_',' ')}}</pre></h1>
-      </div>
     </v-row>
-    <v-row justify="center" style="padding-right: 60px">
-      <v-btn v-on:click="returnBack" color='orange'>
+    <v-row justify="center">
+      <v-btn style="margin-top:25pt" v-on:click="returnBack" color='orange'>
         Return to character selection
       </v-btn>
     </v-row>
