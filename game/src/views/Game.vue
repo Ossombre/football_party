@@ -1,26 +1,22 @@
 <template>
   <v-container>
     <v-row>
-      <v-card style="margin-left: 125px">
-        <v-overlay v-if="!start || this.$game.victory != ''" absolute=true>
-          <h1 v-if="this.$game.victory != ''">{{getVictory()}}</h1>
-          <v-btn  v-on:click="startGame">{{button}}</v-btn>
+      <v-card style="margin-left: 60px">
+        <v-overlay style="text-align: center" v-if="!start || this.$game.victory != ''" absolute=true>
+          <h1 style="display: block" v-if="this.$game.victory != ''">{{getVictory()}}</h1>
+          <v-btn  v-on:click="startGame" style="display: inline-block">{{button}}</v-btn>
         </v-overlay>
         <canvas id="gameScreen" ref="gameScreen" width="1000" height="600"/>
         <img id="bg" :src='require("../assets/background.png")' style="display: none">
         <img id="PictureP1" :src='require("../assets/" + $route.query.player2 + ".png")' style="display: none">
         <img id="PictureP2" :src='require("../assets/" + $route.query.player1 + ".png")' style="display: none">
       </v-card>
-      <v-row>
-        <v-col>
-          <v-row>
-            <h1 style="margin-left: 240px"><pre>{{$route.query.player1.replace('_',' ')}}:  {{ getScoreP1() }}</pre></h1>
-            <h1 style="margin-left: 125px"><pre>{{ getScoreP2() }}  :{{$route.query.player2.replace('_',' ')}}</pre></h1>
-          </v-row>
-        </v-col>
-      </v-row>
+      <div style="width: 100%; text-align: center">
+        <h1 style="display: inline-block"><pre>{{$route.query.player1.replace('_',' ')}}:  {{ getScoreP1() }}</pre></h1>
+        <h1 style="margin-left: 100px; display: inline-block"><pre>{{ getScoreP2() }}  :{{$route.query.player2.replace('_',' ')}}</pre></h1>
+      </div>
     </v-row>
-    <v-row justify="center">
+    <v-row justify="center" style="padding-right: 60px">
       <v-btn v-on:click="returnBack" color='orange'>
         Return to character selection
       </v-btn>
