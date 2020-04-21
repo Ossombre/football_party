@@ -59,9 +59,9 @@ export default {
 
       for (var k = 0; k < this.player.length; k++) {
         if (this.player[k].name === this.$route.query.player2) {
-          this.player2Stat = this.player[k]
-        } else if (this.player[k].name === this.$route.query.player1) {
           this.player1Stat = this.player[k]
+        } else if (this.player[k].name === this.$route.query.player1) {
+          this.player2Stat = this.player[k]
         }
       }
 

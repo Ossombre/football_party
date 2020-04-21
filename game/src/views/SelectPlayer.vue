@@ -124,7 +124,7 @@ export default {
     },
     validate: function (event) {
       if (this.selectRight.name !== undefined && this.selectLeft.name !== undefined) {
-        this.$router.push({ path: 'Game', query: { player1: this.selectRight.name.replace(/\s/g, ''), player2: this.selectLeft.name.replace(/\s/g, '') } })
+        this.$router.push({ path: 'Game', query: { player1: this.selectLeft.name.replace(/\s/g, ''), player2: this.selectRight.name.replace(/\s/g, '') } })
       } else {
         this.alert = 'You must choose two players.'
         this.displayAlert = true
