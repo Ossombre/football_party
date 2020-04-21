@@ -4,7 +4,7 @@
       <v-col>
         <v-card color='orange' style="padding:20px">
           <v-row justify="center">
-            <h1 style="font-color:blue">Player 1</h1>
+            <h1 style="font-color:blue"><pre>Player 1:   Z up, S down</pre></h1>
           </v-row>
           <v-row dense>
             <v-col cols="7">
@@ -41,7 +41,7 @@
       <v-col>
         <v-card color="orange"  style="padding:20px">
           <v-row justify="center">
-            <h1 style="font-color:red">Player 2</h1>
+            <h1 style="font-color:red"><pre>Player 2:   &uarr; up, &darr; down</pre></h1>
           </v-row>
           <v-row dense>
             <v-col cols="5">

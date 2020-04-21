@@ -22,7 +22,7 @@
     </v-row>
     <v-row justify="center">
       <v-btn v-on:click="returnBack" color='orange'>
-        Return to the selection
+        Return to character selection
       </v-btn>
     </v-row>
   </v-container>
