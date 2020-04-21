@@ -1,8 +1,24 @@
 <template>
-  <v-container>
+  <v-container fluid style="margin-left: 100px">
     <v-row>
-      <v-card style="margin-left: 60px">
-        <v-overlay style="text-align: center" v-if="!start || this.$game.victory != ''" absolute=true>
+      <v-col cols="1" style="margin-left: 100px;margin-right:50px">
+      <v-row>
+        <v-card color="blue" height="600" width="200">
+          <v-img
+            :src='require("../assets/" + this.player[1].name + ".png")'>
+          </v-img>
+          <v-card-title v-html="this.player[1].name.replace('_',' ').replace(' ','<br>')">
+          </v-card-title>
+          <v-card-text>
+              Speed: {{this.player[1].speed}} <br>
+              Height: {{this.player[1].height}} <br>
+          </v-card-text>
+        </v-card>
+      </v-row>
+    </v-col>
+    <v-col cols="7">
+      <v-card flat="true">
+        <v-overlay style="text-align: center;margin-right: 50px" v-if="!start || this.$game.victory != ''" absolute="true">
           <h1 style="display: block" v-if="this.$game.victory != ''">{{getVictory()}}</h1>
           <v-btn  v-on:click="startGame" style="display: inline-block">{{button}}</v-btn>
         </v-overlay>
@@ -11,12 +27,28 @@
         <img id="PictureP1" :src='require("../assets/" + $route.query.player2 + ".png")' style="display: none">
         <img id="PictureP2" :src='require("../assets/" + $route.query.player1 + ".png")' style="display: none">
       </v-card>
-      <div style="width: 100%; text-align: center">
-        <h1 style="display: inline-block"><pre>{{$route.query.player1.replace('_',' ')}}:  {{ getScoreP1() }}</pre></h1>
-        <h1 style="margin-left: 100px; display: inline-block"><pre>{{ getScoreP2() }}  :{{$route.query.player2.replace('_',' ')}}</pre></h1>
+    </v-col>
+    <v-col cols="1">
+      <v-row>
+        <v-card color="red" height="600" width="200">
+          <v-img
+            :src='require("../assets/" + this.player[0].name + ".png")'>
+          </v-img>
+          <v-card-title v-html="this.player[0].name.replace('_',' ').replace(' ','<br>')">
+          </v-card-title>
+          <v-card-text>
+              Speed: {{this.player[0].speed}} <br>
+              Height: {{this.player[0].height}} <br>
+          </v-card-text>
+        </v-card>
+      </v-row>
+    </v-col>
+      <div style="width: 100%;margin-left:450px">
+        <h1 style="display: inline-block;color: blue"><pre>{{$route.query.player1.replace('_',' ')}}:  {{ getScoreP1() }}</pre></h1>
+        <h1 style="margin-left: 100px; display: inline-block; color:red"><pre>{{ getScoreP2() }}  :{{$route.query.player2.replace('_',' ')}}</pre></h1>
       </div>
     </v-row>
-    <v-row justify="center" style="padding-right: 60px">
+    <v-row justify="center" style="padding-right: 300px;padding-top:30px">
       <v-btn v-on:click="returnBack" color='orange'>
         Return to character selection
       </v-btn>
