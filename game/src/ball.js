@@ -1,6 +1,5 @@
 export default class Ball {
   constructor (game) {
-    // this.image = document.getElementById("img_ball")
     this.gameWidth = game.gameWidth
     this.gameHeight = game.gameHeight
 
@@ -15,15 +14,8 @@ export default class Ball {
   }
 
   draw (ctx) {
-    ctx.fillStyle = '#000'// need to remove
-    ctx.fillRect(this.position.x, this.position.y, this.size, this.size)// need to remove
-    /* ctx.drawImage(
-      this.image,
-      this.position.x,
-      this.position.y,
-      this.size,
-      this.size
-    ) */
+    ctx.fillStyle = '#000'
+    ctx.fillRect(this.position.x, this.position.y, this.size, this.size)
   }
 
   update (deltaTime) {
@@ -152,15 +144,5 @@ export default class Ball {
     }
     this.game.scoreP1 = 0
     this.game.scoreP2 = 0
-    /* this.game.player1.isFrozen = true
-    this.game.player2.isFrozen = true
-    this.game.player1.stop()
-    this.game.player2.stop()
-    this.game.player1.position.y = this.game.gameHeight / 2 - this.game.player1.height / 2
-    this.game.player2.position.y = this.game.gameHeight / 2 - this.game.player2.height / 2
-    this.speed.x = 0
-    this.speed.y = 0
-    this.position.x = this.game.gameWidth / 2 - this.size / 2
-    this.position.y = this.game.gameHeight / 2 - this.size / 2 */
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-card>
+      <v-card style="margin-left: 125px">
         <v-overlay v-if="!start || this.$game.victory != ''" absolute=true>
           <h1 v-if="this.$game.victory != ''">{{getVictory()}}</h1>
           <v-btn  v-on:click="startGame">{{button}}</v-btn>

@@ -12,19 +12,14 @@ export default class Player1 {
       x: 9 * game.gameWidth / 10 - this.width / 2,
       y: game.gameHeight / 2 - this.height / 2
     }
-    this.isFrozen = false
   }
 
   moveDown () {
-    if (!this.isFrozen) {
-      this.speed = this.maxSpeed
-    }
+    this.speed = this.maxSpeed
   }
 
   moveUp () {
-    if (!this.isFrozen) {
-      this.speed = -this.maxSpeed
-    }
+    this.speed = -this.maxSpeed
   }
 
   stop () {
@@ -46,7 +41,7 @@ export default class Player1 {
     return offscreenCanvas
   }
 
-  draw (ctx) { // will probably need to be replaced like in ball
+  draw (ctx) {
     ctx.beginPath()
     ctx.strokeStyle = 'red'
     ctx.lineWidth = '10'

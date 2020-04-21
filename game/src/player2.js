@@ -12,19 +12,14 @@ export default class Player2 {
       x: game.gameWidth / 10 - this.width / 2,
       y: game.gameHeight / 2 - this.height / 2
     }
-    this.isFrozen = false
   }
 
   moveDown () {
-    if (!this.isFrozen) {
-      this.speed = this.maxSpeed
-    }
+    this.speed = this.maxSpeed
   }
 
   moveUp () {
-    if (!this.isFrozen) {
-      this.speed = -this.maxSpeed
-    }
+    this.speed = -this.maxSpeed
   }
 
   stop () {
