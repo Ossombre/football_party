@@ -1,35 +1,35 @@
 <template>
   <v-container fluid>
-    <v-row style="margin-left:100pt">
-      <v-col >
+    <v-row justify="center">
+      <v-col cols="5">
         <v-row>
           <v-card color="blue" height="125pt" width="400pt">
-            <v-row>
-              <v-col cols="4">
-                <v-img
-                  :src='require("../assets/" + $route.query.player1 + ".png")'>
-                </v-img>
-              </v-col>
-              <v-col cols="4" style="margin-top: 25pt;">
-                <v-card-title v-html="$route.query.player1.replace('_',' ').replace(' ','<br>')">
-                </v-card-title>
-              </v-col>
-              <v-col cols="4" style="margin-top: 40pt;">
-                <h1>{{getScoreP1()}}</h1>
-              </v-col>
-            </v-row>
+              <v-row>
+                <v-col cols="4">
+                  <v-img
+                    :src='require("../assets/" + $route.query.player1 + ".png")'>
+                  </v-img>
+                </v-col>
+                <v-col cols="4" style="margin-top: 25pt;">
+                  <v-card-title v-html="$route.query.player1.replace('_',' ').replace(' ','<br>')">
+                  </v-card-title>
+                </v-col>
+                <v-col cols="4" style="margin-top: 40pt;">
+                  <h1>{{getScoreP1()}}</h1>
+                </v-col>
+              </v-row>
           </v-card>
         </v-row>
       </v-col>
-      <v-col>
-        <h1 style="margin-top:50pt;margin-left:170pt">VS</h1>
+      <v-col cols="1">
+        <h1 style="margin-top:50pt">VS</h1>
       </v-col>
-      <v-col style="margin-right:120px;">
+      <v-col style="margin-right:10px;" cols="5">
         <v-row>
           <v-card color="red" height="125pt" width="400pt">
             <v-row>
               <v-col cols="4" style="margin-top: 40pt;">
-                <h1 style="margin-left:75pt">{{getScoreP2()}}</h1>
+                <h1 style="margin-left:25pt">{{getScoreP2()}}</h1>
               </v-col>
               <v-col cols="4" style="margin-top: 20pt;">
                 <v-card-title v-html="$route.query.player2.replace('_',' ').replace(' ','<br>')">
@@ -46,8 +46,8 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-row >
-      <v-card style="margin-left: 320pt">
+    <v-row justify="center">
+      <v-card>
         <v-overlay style="text-align: center" v-if="!start || this.$game.victory != ''" absolute=true>
           <h1 style="display: block" v-if="this.$game.victory != ''">{{getVictory()}}</h1>
           <v-btn  v-on:click="startGame" style="display: inline-block">{{button}}</v-btn>
