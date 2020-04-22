@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row justify="center">
       <v-col cols="5">
-        <v-row>
+        <v-row justify="center">
           <v-card color="blue" height="125pt" width="400pt">
               <v-row>
                 <v-col cols="4">
